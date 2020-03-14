@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TaskFormPage implements OnInit {
   task: Task =  new Task();
-  title: String = "Nova Tarefa";
+  title: String = 'Nova Tarefa';
   constructor(
     private activedRouter: ActivatedRoute,
     private router: Router,
@@ -19,14 +19,15 @@ export class TaskFormPage implements OnInit {
 
   ngOnInit() {
     const id = this.activedRouter.snapshot.paramMap.get('id');
-    if(id){
+    if (id) {
       this.task = this.taskService.getById(parseInt(id));
       this.title = 'Alterando os dados';
     }
   }
 
-  onSubimit(){
-    
-  };
+  onSubmit(){
+    this.taskService.save(this.task);
+    this.router.navigate(['']);
+  }
 
 }
